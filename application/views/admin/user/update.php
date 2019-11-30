@@ -35,54 +35,62 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-35">Produk Detail <b>Edit</b></h3>
+                <h3 class="title-5 m-b-35">User <b>Edit</b></h3>
 
                 <?php echo form_open_multipart(""); ?>
                 <div class="form-group row">
                     <div class="col-md-2">
-                        <label for="col-form-label">Produk</label>
+                        <label for="col-form-label">Nama</label>
                     </div>
                     <div class="col-md-10">
-                        <select name="fk_produk" id="input-fk-produk" class="form-control">
-                            <option value="" selected disabled>Choose</option>
-                            <?php foreach ($this->db->get('produk')->result() as $key => $value) : ?>
+                        <input type="text" name="nama" class="form-control" value="<?php echo set_value('nama') ?>">
+                        <?php echo form_error('nama', '<p class="text-danger">', '</p>') ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="col-form-label">username</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" name="username" class="form-control" value="<?php echo set_value('username') ?>">
+                        <?php echo form_error('username', '<p class="text-danger">', '</p>') ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="col-form-label">password</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="password" name="password" class="form-control" value="<?php echo set_value('password') ?>">
+                        <?php echo form_error('password', '<p class="text-danger">', '</p>') ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="col-form-label">role</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select name="role" class="form-control">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Supplier</option>
+                            <option value="3">Courier</option>
+                        </select>
+                        <?php echo form_error('role', '<p class="text-danger">', '</p>') ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="col-form-label">Supplier</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select name="fk_supplier" class="form-control" disabled>
+                            <option value="" disabled selected>Pilih</option>
+                            <?php foreach ($this->db->get('supplier')->result() as $key => $value) : ?>
                                 <option value="<?php echo $value->id ?>"><?php echo $value->nama ?></option>
                             <?php endforeach ?>
                         </select>
-                        
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label for="col-form-label">jenis</label>
-                    </div>
-                    <div class="col-md-10">
-                        <input type="text" name="jenis" class="form-control" value="<?php echo set_value('jenis') ?>">
-                        <?php echo form_error('jenis', '<p class="text-danger">', '</p>') ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label for="col-form-label">satuan</label>
-                    </div>
-                    <div class="col-md-10">
-                        <input type="text" name="satuan" class="form-control" value="<?php echo set_value('satuan') ?>" list="list-satuan">
-                        <datalist id="list-satuan">
-                            <?php foreach ($this->db->select('satuan')->group_by('satuan')->get('produk_detail')->result() as $key => $value) : ?>
-                                <option><?php echo $value->satuan ?></option>
-                            <?php endforeach ?>
-                        </datalist>
-                        <?php echo form_error('satuan', '<p class="text-danger">', '</p>') ?>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label for="col-form-label">harga</label>
-                    </div>
-                    <div class="col-md-10">
-                        <input type="number" name="harga" class="form-control" value="<?php echo set_value('harga') ?>">
-                        <?php echo form_error('harga', '<p class="text-danger">', '</p>') ?>
+                        <?php echo form_error('role', '<p class="text-danger">', '</p>') ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -127,6 +135,7 @@
     $(document).ready(function() {
         $('#data-table').DataTable();
 
+        $('[name="role"]').val('<?php echo set_value('role') ?>');
         $('#file-gambar').change(function() {
             var reader = new FileReader();
             reader.onload = function(e) {
@@ -136,6 +145,13 @@
             reader.readAsDataURL(this.files[0]);
         });
 
-        $('#input-fk-produk').val('<?php echo $_POST['fk_produk'] ?>')
+        $('[name=role').change(function() {
+            let val = $(this).val();
+            if (val == 2) {
+                $('[name=fk_supplier]').attr('disabled', false);
+            } else {
+                $('[name=fk_supplier]').attr('disabled', true).val($('[name=fk_supplier]').find('option:first').val());
+            }
+        });
     });
 </script>

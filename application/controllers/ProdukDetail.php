@@ -9,6 +9,13 @@ class ProdukDetail extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('login_status')){
+            redirect("Login");
+		}
+		
+		if($this->session->userdata('login_role') != 1){
+            redirect("Dashboard");
+        }
 	}
 
 	public function set_produk($id = null)
@@ -112,7 +119,7 @@ class ProdukDetail extends CI_Controller
 
 			if (!$this->upload->do_upload('gambar')) {
 				$data['gambar_error'] = $this->upload->display_errors();
-				$this->load->view('admin/produkdetail/insert', $data);
+				$this->load->view('admin/produkdetail/update', $data);
 			} else {
 				$upload_data = $this->upload->data();
 				$set['gambar'] = $upload_data['file_name'];

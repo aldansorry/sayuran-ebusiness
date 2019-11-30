@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-35">Produk <b>Tambah</b></h3>
+                <h3 class="title-5 m-b-35">Produk Detail <b>Tambah</b></h3>
 
                 <?php echo form_open_multipart(""); ?>
                 <div class="form-group row">

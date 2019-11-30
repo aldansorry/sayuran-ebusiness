@@ -9,6 +9,13 @@ class Produk extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('login_status')){
+            redirect("Login");
+		}
+		
+		if($this->session->userdata('login_role') != 1){
+            redirect("Dashboard");
+        }
 	}
 
 	public function index()
@@ -50,7 +57,7 @@ class Produk extends CI_Controller
 
 			if (!$this->upload->do_upload('gambar')) {
 				$data['gambar_error'] = $this->upload->display_errors();
-				$this->load->view('admin/produkdetail/insert', $data);
+				$this->load->view('admin/produk/insert', $data);
 			} else {
 				$upload_data = $this->upload->data();
 				$set['gambar'] = $upload_data['file_name'];
@@ -80,7 +87,7 @@ class Produk extends CI_Controller
 			}
 			$this->load->view('admin/produk/update', $data);
 		} else {
-			$data_produk = $this->db->where('id', $id)->get('produk_detail')->row(0);
+			$data_produk = $this->db->where('id', $id)->get('produk')->row(0);
 			$set = $this->input->post();
 			$config['upload_path']          = './storage/produk/';
 			$config['allowed_types']        = 'gif|jpg|png';
@@ -92,7 +99,7 @@ class Produk extends CI_Controller
 
 			if (!$this->upload->do_upload('gambar')) {
 				$data['gambar_error'] = $this->upload->display_errors();
-				$this->load->view('admin/produkdetail/insert', $data);
+				$this->load->view('admin/produk/update', $data);
 			} else {
 				$upload_data = $this->upload->data();
 				$set['gambar'] = $upload_data['file_name'];
@@ -104,7 +111,7 @@ class Produk extends CI_Controller
 
 	public function delete($id)
 	{
-		$data_produk = $this->db->where('id', $id)->get('produk_detail')->row(0);
+		$data_produk = $this->db->where('id', $id)->get('produk')->row(0);
 		unlink('storage/produk/'.$data_produk->gambar);
 		
 		$this->db->where('id',$id)->delete('produk');

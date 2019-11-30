@@ -35,54 +35,35 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-35">Produk Detail <b>Edit</b></h3>
+                <h3 class="title-5 m-b-35">Supplier <b>Tambah</b></h3>
 
                 <?php echo form_open_multipart(""); ?>
                 <div class="form-group row">
                     <div class="col-md-2">
-                        <label for="col-form-label">Produk</label>
+                        <label for="col-form-label">Nama</label>
                     </div>
                     <div class="col-md-10">
-                        <select name="fk_produk" id="input-fk-produk" class="form-control">
-                            <option value="" selected disabled>Choose</option>
-                            <?php foreach ($this->db->get('produk')->result() as $key => $value) : ?>
-                                <option value="<?php echo $value->id ?>"><?php echo $value->nama ?></option>
-                            <?php endforeach ?>
-                        </select>
-                        
+                        <input type="text" name="nama" class="form-control" value="<?php echo set_value('nama') ?>">
+                        <?php echo form_error('nama', '<p class="text-danger">', '</p>') ?>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="col-form-label">alamat</label>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea name="alamat" class="form-control"><?php echo set_value('alamat') ?></textarea>
+                        <?php echo form_error('alamat', '<p class="text-danger">', '</p>') ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-2">
-                        <label for="col-form-label">jenis</label>
+                        <label for="col-form-label">keterangan</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" name="jenis" class="form-control" value="<?php echo set_value('jenis') ?>">
-                        <?php echo form_error('jenis', '<p class="text-danger">', '</p>') ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label for="col-form-label">satuan</label>
-                    </div>
-                    <div class="col-md-10">
-                        <input type="text" name="satuan" class="form-control" value="<?php echo set_value('satuan') ?>" list="list-satuan">
-                        <datalist id="list-satuan">
-                            <?php foreach ($this->db->select('satuan')->group_by('satuan')->get('produk_detail')->result() as $key => $value) : ?>
-                                <option><?php echo $value->satuan ?></option>
-                            <?php endforeach ?>
-                        </datalist>
-                        <?php echo form_error('satuan', '<p class="text-danger">', '</p>') ?>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label for="col-form-label">harga</label>
-                    </div>
-                    <div class="col-md-10">
-                        <input type="number" name="harga" class="form-control" value="<?php echo set_value('harga') ?>">
-                        <?php echo form_error('harga', '<p class="text-danger">', '</p>') ?>
+                        <textarea name="keterangan" class="form-control"><?php echo set_value('keterangan') ?></textarea>
+                        <?php echo form_error('keterangan', '<p class="text-danger">', '</p>') ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -99,7 +80,7 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-10">
-                        <button type="submit" class="btn btn-warning"><i class="fa fa-pencil-alt"></i> Edit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button>
                     </div>
                 </div>
                 <?php echo form_close(); ?>
@@ -127,6 +108,8 @@
     $(document).ready(function() {
         $('#data-table').DataTable();
 
+
+        $('[name="role"]').val('<?php echo set_value('role') ?>');
         $('#file-gambar').change(function() {
             var reader = new FileReader();
             reader.onload = function(e) {
@@ -135,7 +118,5 @@
             }
             reader.readAsDataURL(this.files[0]);
         });
-
-        $('#input-fk-produk').val('<?php echo $_POST['fk_produk'] ?>')
     });
 </script>
