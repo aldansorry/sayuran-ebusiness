@@ -37,7 +37,7 @@
             <div class="col-md-12">
                 <h3 class="title-5 m-b-35">Produk <b>Tambah</b></h3>
 
-                <?php echo form_open(""); ?>
+                <?php echo form_open_multipart(""); ?>
                 <div class="form-group row">
                     <div class="col-md-2">
                         <label for="col-form-label">Nama</label>
@@ -61,8 +61,18 @@
                         <label for="col-form-label">keterangan</label>
                     </div>
                     <div class="col-md-10">
-                        <textarea name="keterangan" class="form-control" value="<?php echo set_value('keterangan') ?>"></textarea>
+                        <textarea name="keterangan" class="form-control"><?php echo set_value('keterangan') ?></textarea>
                         <?php echo form_error('keterangan', '<p class="text-danger">', '</p>') ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label for="col-form-label">gambar</label>
+                    </div>
+                    <div class="col-md-10">
+                        <img src="" id="img-preview" alt="" style="width:200px;display:none">
+                        <input type="file" name="gambar" id="file-gambar" class="form-control">
+                        <?php echo (isset($gambar_error) ? "<p class='text-danger'>" . $gambar_error . "</p>" : "") ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -96,5 +106,14 @@
 <script>
     $(document).ready(function() {
         $('#data-table').DataTable();
+
+        $('#file-gambar').change(function() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#img-preview').attr('src', e.target.result);
+                $('#img-preview').fadeIn();
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
     });
 </script>

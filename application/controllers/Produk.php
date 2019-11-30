@@ -41,8 +41,22 @@ class Produk extends CI_Controller
 			$this->load->view('admin/produk/insert', $data);
 		} else {
 			$set = $this->input->post();
-			$this->db->insert('produk', $set);
-			redirect($this->cname);
+			$config['upload_path']          = './storage/produk/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 2000;
+			$config['encrypt_name'] 		= true;
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload('gambar')) {
+				$data['gambar_error'] = $this->upload->display_errors();
+				$this->load->view('admin/produkdetail/insert', $data);
+			} else {
+				$upload_data = $this->upload->data();
+				$set['gambar'] = $upload_data['file_name'];
+				$this->db->insert('produk', $set);
+				redirect($this->cname);
+			}
 		}
 	}
 
@@ -66,14 +80,33 @@ class Produk extends CI_Controller
 			}
 			$this->load->view('admin/produk/update', $data);
 		} else {
+			$data_produk = $this->db->where('id', $id)->get('produk_detail')->row(0);
 			$set = $this->input->post();
-			$this->db->where('id',$id)->update('produk', $set);
-			redirect($this->cname);
+			$config['upload_path']          = './storage/produk/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 2000;
+			$config['file_name'] 			= $data_produk->gambar;
+			$config['overwrite'] 			= true;
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload('gambar')) {
+				$data['gambar_error'] = $this->upload->display_errors();
+				$this->load->view('admin/produkdetail/insert', $data);
+			} else {
+				$upload_data = $this->upload->data();
+				$set['gambar'] = $upload_data['file_name'];
+				$this->db->where('id',$id)->update('produk', $set);
+				redirect($this->cname);
+			}
 		}
 	}
 
 	public function delete($id)
 	{
+		$data_produk = $this->db->where('id', $id)->get('produk_detail')->row(0);
+		unlink('storage/produk/'.$data_produk->gambar);
+		
 		$this->db->where('id',$id)->delete('produk');
 		redirect($this->cname);
 	}
