@@ -11,6 +11,13 @@ class Home extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('home');
+		$data['produk'] = $this->db->select('produk.*,min(produk_detail.harga) as harga')->join('produk_detail','produk.id=produk_detail.fk_produk')->get('produk')->result();
+		$this->load->view('home/home',$data);
+	}
+
+	public function produk($id)
+	{
+		$data['produk'] = $this->db->select('produk.*,min(produk_detail.harga) as minharga,max(produk_detail.harga) as maxharga')->join('produk_detail','produk.id=produk_detail.fk_produk')->where('produk.id',$id)->get('produk')->row(0);
+		$this->load->view('home/produk',$data);
 	}
 }
