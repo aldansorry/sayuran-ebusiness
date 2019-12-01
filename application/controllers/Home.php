@@ -67,7 +67,8 @@ class Home extends CI_Controller
 			}
 		}
 
-		$this->form_validation->set_rules('payment_method', 'payment_method', "trim|required");
+		$this->form_validation->set_rules('tanggal_kirim', 'tanggal_kirim', "trim|required");
+		$this->form_validation->set_rules('waktu_kirim', 'waktu_kirim', "trim|required");
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('home/checkout', $data);
@@ -129,7 +130,7 @@ class Home extends CI_Controller
 
 			$set_penjualan = [
 				'kode' => $kode,
-				'payment_method' => $payment_method,
+				'tanggal_kirim' => $this->input->post('tanggal_kirim')." ".$this->input->post('waktu_kirim'),
 				'status' => '1',
 				'fk_pengguna' => $id_pengguna
 			];
@@ -268,7 +269,7 @@ class Home extends CI_Controller
 			$data['kode'] = $kode;
 			$this->load->view('home/buktipembayaran', $data);
 		} else {
-			$config['upload_path']          = './storage/produk/';
+			$config['upload_path']          = './storage/buktipembayaran/';
 			$config['allowed_types']        = 'gif|jpg|png';
 			$config['max_size']             = 2000;
 			$config['file_name'] 		= $kode.".jpg";
@@ -281,6 +282,7 @@ class Home extends CI_Controller
 				$this->load->view('home/buktipembayaran', $data);
 			} else {
 				$upload_data = $this->upload->data();
+				$set['status'] = 2;
 				$set['bukti_pembayaran'] = $upload_data['file_name'];
 				$this->db->where('kode',$kode)->update('penjualan', $set);
 				redirect('Home/pembelian');

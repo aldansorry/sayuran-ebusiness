@@ -62,16 +62,19 @@
                             <li class="has-sub">
                                 <a href="#">
                                     <i class="fas fa-random"></i>
-                                    <span class="bot-line"></span>Transactional</a>
+                                    <span class="bot-line"></span>Penjualan</a>
                                 <ul class="header3-sub-list list-unstyled">
                                     <li>
                                         <a href="<?php echo base_url('Penjualan') ?>">Penjualan</a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo base_url('Pengiriman') ?>">Pengiriman</a>
+                                        <a href="<?php echo base_url('Penjualan/konfirmasipembeyaran') ?>">Konfirmasi Pembayaran</a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo base_url('Pembelian') ?>">Pembelian</a>
+                                        <a href="<?php echo base_url('Penjualan/pengiriman') ?>">Pengiriman</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url('Penjualan/selesai') ?>">Selesai</a>
                                     </li>
                                 </ul>
                             </li>

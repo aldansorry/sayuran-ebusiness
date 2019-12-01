@@ -19,8 +19,10 @@
                         <thead class="thead-primary">
                             <tr class="text-center">
                                 <th>Tanggal</th>
+                                <th>Tanggal Kirim</th>
                                 <th>Product List</th>
                                 <th>Total</th>
+                                <th>Status</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -28,6 +30,7 @@
                             <?php foreach ($this->db->where('fk_pengguna', $this->session->userdata('lg_id'))->get('penjualan')->result() as $key => $value) : ?>
                                 <tr class="text-center">
                                     <td><?php echo $value->tanggal ?></td>
+                                    <td><?php echo $value->tanggal_kirim ?></td>
 
                                     <td class="">
                                         <p>
@@ -43,7 +46,32 @@
 
 
                                     <td class="total"><?php echo $total ?></td>
-                                    <td class="product-remove"><a href="<?php echo base_url('Home/buktipembayaran/'.$value->kode) ?>"><span class="ion-ios-close"></span></a></td>
+                                    <td>
+                                    <?php 
+                                        switch($value->status){
+                                            case 1:
+                                                echo '<span class="badge badge-secondary">lakukan bukti pembayaran</span>';
+                                            break;
+                                            case 2:
+                                                echo '<span class="badge badge-primary">tunggu konfirmasi</span>';
+                                            break;
+                                            case 3:
+                                                echo '<span class="badge badge-success">sudah dikonfirmasi</span>';
+                                            break;
+                                            case 4:
+                                                echo '<span class="badge badge-warning">proses pengiriman</span>';
+                                            break;
+                                            case 5:
+                                                echo '<span class="badge badge-success">selesai</span>';
+                                            break;
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="product-remove">
+                                        <?php if($value->status==1): ?>
+                                            <a href="<?php echo base_url('Home/buktipembayaran/'.$value->kode) ?>">Bayar</a>
+                                        <?php endif ?>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
 

@@ -18,8 +18,8 @@
                 <div class="col-xl-7 ftco-animate">
 
                     <?php if ($this->session->userdata('lg_status')) : ?>
-                        
-                    <h3 class="mb-4 billing-heading">Your Billing Information</h3>
+
+                        <h3 class="mb-4 billing-heading">Your Billing Information</h3>
                         <div class="row align-items-end">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -89,125 +89,125 @@
                             </div>
                             <div class="w-100"></div>
                         </div>
-                    <?php else: ?>
-                        
-                    <h3 class="mb-4 billing-heading">Login</h3>
-                    <div class="row align-items-end">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="firstname">Email</label>
-                                <input type="text" name="login[email]" class="form-control" style="color:black !important" placeholder="" value="<?php echo set_value('login[email]') ?>">
-                                <?php echo form_error('login[email]', '<p class="text-danger">', '</p>') ?>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="firstname">Password</label>
-                                <input type="text" name="login[password]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('login[password]', '<p class="text-danger">', '</p>') ?>
-                            </div>
-                        </div>
-                        <div class="w-100">
-                            <div class="separator">OR Register</div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="firstname">Nama</label>
-                                <input type="text" name="register[nama]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[nama]', '<p class="text-danger">', '</p>') ?>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
+                    <?php else : ?>
 
-                        <div class="w-100"></div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="streetaddress">Street Address</label>
-                                <input type="text" name="register[alamat]" class="form-control" style="color:black !important" placeholder="House number and street name">
-                                <?php echo form_error('register[alamat]', '<p class="text-danger">', '</p>') ?>
+                        <h3 class="mb-4 billing-heading">Login</h3>
+                        <div class="row align-items-end">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="firstname">Email</label>
+                                    <input type="text" name="login[email]" class="form-control" style="color:black !important" placeholder="" value="<?php echo set_value('login[email]') ?>">
+                                    <?php echo form_error('login[email]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="text" name="register[alamatNote]" class="form-control" style="color:black !important" placeholder="Appartment, suite, unit etc: (optional)">
-                                <?php echo form_error('register[alamatNote]', '<p class="text-danger">', '</p>') ?>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="firstname">Password</label>
+                                    <input type="text" name="login[password]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('login[password]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="streetaddress">Negara</label>
-                                <input type="text" name="register[negara]" class="form-control" style="color:black !important" value="Indonesia" disabled>
+                            <div class="w-100">
+                                <div class="separator">OR Register</div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="towncity">Provinsi</label>
-                                <input type="text" name="register[provinsi]" class="form-control" style="color:black !important" value="Jawa Timur" disabled>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="firstname">Nama</label>
+                                    <input type="text" name="register[nama]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[nama]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="postcodezip">Kota</label>
-                                <input type="text" name="register[kota]" class="form-control" style="color:black !important" value="Malang" disabled>
+                            <div class="w-100"></div>
+
+                            <div class="w-100"></div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="streetaddress">Street Address</label>
+                                    <input type="text" name="register[alamat]" class="form-control" style="color:black !important" placeholder="House number and street name">
+                                    <?php echo form_error('register[alamat]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="towncity">Kecamatan</label>
-                                <input type="text" name="register[kecamatan]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[kecamatan]', '<p class="text-danger">', '</p>') ?>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" name="register[alamatNote]" class="form-control" style="color:black !important" placeholder="Appartment, suite, unit etc: (optional)">
+                                    <?php echo form_error('register[alamatNote]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="postcodezip">Kode Pos</label>
-                                <input type="text" name="register[kodepos]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[kodepos]', '<p class="text-danger">', '</p>') ?>
+                            <div class="w-100"></div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="streetaddress">Negara</label>
+                                    <input type="text" name="register[negara]" class="form-control" style="color:black !important" value="Indonesia" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phone">Telepon (WhatsApp)</label>
-                                <input type="text" name="register[telepon]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[telepon]', '<p class="text-danger">', '</p>') ?>
+                            <div class="w-100"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="towncity">Provinsi</label>
+                                    <input type="text" name="register[provinsi]" class="form-control" style="color:black !important" value="Jawa Timur" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="emailaddress">Email</label>
-                                <input type="text" name="register[email]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[email]', '<p class="text-danger">', '</p>') ?>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="postcodezip">Kota</label>
+                                    <input type="text" name="register[kota]" class="form-control" style="color:black !important" value="Malang" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phone">Password</label>
-                                <input type="text" name="register[password]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[password]', '<p class="text-danger">', '</p>') ?>
+                            <div class="w-100"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="towncity">Kecamatan</label>
+                                    <input type="text" name="register[kecamatan]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[kecamatan]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="emailaddress">Reenter Password</label>
-                                <input type="text" name="register[repassword]" class="form-control" style="color:black !important" placeholder="">
-                                <?php echo form_error('register[repassword]', '<p class="text-danger">', '</p>') ?>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="postcodezip">Kode Pos</label>
+                                    <input type="text" name="register[kodepos]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[kodepos]', '<p class="text-danger">', '</p>') ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-12">
-                            <div class="form-group mt-4">
-                                <div class="radio">
-                                    <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-                                    <label><input type="radio" name="optradio"> Ship to different address</label>
+                            <div class="w-100"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Telepon (WhatsApp)</label>
+                                    <input type="text" name="register[telepon]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[telepon]', '<p class="text-danger">', '</p>') ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="emailaddress">Email</label>
+                                    <input type="text" name="register[email]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[email]', '<p class="text-danger">', '</p>') ?>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Password</label>
+                                    <input type="text" name="register[password]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[password]', '<p class="text-danger">', '</p>') ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="emailaddress">Reenter Password</label>
+                                    <input type="text" name="register[repassword]" class="form-control" style="color:black !important" placeholder="">
+                                    <?php echo form_error('register[repassword]', '<p class="text-danger">', '</p>') ?>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-md-12">
+                                <div class="form-group mt-4">
+                                    <div class="radio">
+                                        <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
+                                        <label><input type="radio" name="optradio"> Ship to different address</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <?php endif ?>
                 </div>
                 <div class="col-xl-5">
@@ -237,18 +237,16 @@
                         <div class="col-md-12">
                             <div class="cart-detail p-3 p-md-4">
                                 <h3 class="billing-heading mb-4">Payment Method</h3>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="payment_method" value="bank" class="mr-2" checked> Direct Bank Tranfer</label>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="emailaddress">Tanggal Kirim</label>
+                                        <input type="date" name="tanggal_kirim" class="form-control" style="color:black !important" placeholder="">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="payment_method" value="ovo" class="mr-2"> Ovo</label>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="emailaddress">Waktu Kirim</label>
+                                        <input type="time" name="waktu_kirim" class="form-control" style="color:black !important" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
