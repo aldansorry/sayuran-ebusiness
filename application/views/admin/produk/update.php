@@ -49,11 +49,11 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-2">
-                        <label for="col-form-label">sayur</label>
+                        <label for="col-form-label">kategori</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" name="sayur" class="form-control" value="<?php echo set_value('sayur') ?>">
-                        <?php echo form_error('sayur', '<p class="text-danger">', '</p>') ?>
+                        <input type="text" name="kategori" class="form-control" value="<?php echo set_value('kategori') ?>">
+                        <?php echo form_error('kategori', '<p class="text-danger">', '</p>') ?>
                     </div>
                 </div>
                 <div class="form-group row">

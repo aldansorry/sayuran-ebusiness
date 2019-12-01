@@ -38,7 +38,7 @@ class Produk extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('sayur', 'sayur', 'trim|required');
+		$this->form_validation->set_rules('kategori', 'kategori', 'trim|required');
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
 		if ($this->form_validation->run() == false) {
@@ -72,7 +72,7 @@ class Produk extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('sayur', 'sayur', 'trim|required');
+		$this->form_validation->set_rules('kategori', 'kategori', 'trim|required');
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
 		if ($this->form_validation->run() == false) {
@@ -82,7 +82,7 @@ class Produk extends CI_Controller
 			$data_produk = $this->db->where('id',$id)->get('produk')->row(0);
 			if($data_produk != null){
 				$_POST['nama'] = $data_produk->nama;
-				$_POST['sayur'] = $data_produk->sayur;
+				$_POST['kategori'] = $data_produk->kategori;
 				$_POST['keterangan'] = $data_produk->keterangan;
 			}
 			$this->load->view('admin/produk/update', $data);

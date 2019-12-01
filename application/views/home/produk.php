@@ -41,7 +41,7 @@
                 </p>
                 <div class="row mt-4">
                     <div class="col-md-6">
-                    <img src="<?php echo base_url('storage/produk/'.$produk->gambar) ?>" class="img-fluid mb-3" id="produk-detail-img" alt="Colorlib Template" style="width:150px;">
+                        <img src="<?php echo base_url('storage/produk/' . $produk->gambar) ?>" class="img-fluid mb-3" id="produk-detail-img" alt="Colorlib Template" style="width:150px;">
                         <div class="form-group d-flex">
                             <div class="select-wrap">
                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -72,7 +72,7 @@
                         <p style="color: #000;">600 kg available</p>
                     </div>
                 </div>
-                <p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+                <p><a href="#" class="btn btn-black py-3 px-5" id="btn-add-to-cart">Add to Cart</a></p>
             </div>
         </div>
     </div>
@@ -208,9 +208,58 @@
 </section>
 <?php $this->load->view('home/includes/footer') ?>
 <script>
-$(document).ready(function(){
-    $('[name=id_produk_detail]').change(function(){
-        $('#produk-detail-img').attr('src',"<?php echo base_url('storage/produk/') ?>"+$(this).find(':selected').data('gambar'));
+    $(document).ready(function() {
+        $('[name=id_produk_detail]').change(function() {
+            $('#produk-detail-img').attr('src', "<?php echo base_url('storage/produk/') ?>" + $(this).find(':selected').data('gambar'));
+        });
+
+        var quantity = 0;
+        $('.quantity-right-plus').click(function(e) {
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            $('#quantity').val(quantity + 1);
+
+
+            // Increment
+
+        });
+
+        $('.quantity-left-minus').click(function(e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            // Increment
+            if (quantity > 0) {
+                $('#quantity').val(quantity - 1);
+            }
+        });
+
+
+        $('#btn-add-to-cart').click(function(){
+            let id_produk = $('[name=id_produk_detail]').val();
+            let quantity = $('[name=quantity]').val();
+            
+            $.ajax({
+                url : "<?php echo base_url('Cart/insert') ?>",
+                type : "POST",
+                data : {
+                    id_produk : id_produk,
+                    quantity : quantity
+                }
+            }).done(function(data){
+                refresh_count();
+                alert("SUKSES ADD TO CART");
+            });
+        });
     });
-});
 </script>

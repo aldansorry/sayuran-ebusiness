@@ -78,7 +78,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
-                                <th>Sayur</th>
+                                <th>Kategori</th>
                                 <th>Keterangan</th>
                                 <th>Gambar</th>
                                 <th></th>
@@ -89,7 +89,7 @@
                                 <tr>
                                     <td><?php echo $key+1 ?></td>
                                     <td><?php echo $value->nama ?></td>
-                                    <td><?php echo $value->sayur ?></td>
+                                    <td><?php echo $value->kategori ?></td>
                                     <td><?php echo $value->keterangan ?></td>
                                     <td>
                                         <img src="<?php echo base_url('storage/produk/'.$value->gambar) ?>" alt="" style="width:100px">
