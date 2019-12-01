@@ -32,6 +32,27 @@
 		.link-disabled {
 			pointer-events: none;
 		}
+
+		.separator {
+			display: flex;
+			align-items: center;
+			text-align: center;
+		}
+
+		.separator::before,
+		.separator::after {
+			content: '';
+			flex: 1;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+		}
+
+		.separator::before {
+			margin-right: .25em;
+		}
+
+		.separator::after {
+			margin-left: .25em;
+		}
 	</style>
 </head>
 
@@ -78,8 +99,21 @@
 						</div>
 					</li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="<?php echo base_url('Dashboard') ?>" class="nav-link">Admin</a></li>
+					<?php if ($this->session->userdata('lg_status')) : ?>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pengguna [<?php echo $this->session->userdata('lg_nama') ?>]</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown04">
+								<a class="dropdown-item" href="<?php echo base_url('Home/pembelian') ?>">Pembelian</a>
+								<a class="dropdown-item" href="<?php echo base_url('Home/profile') ?>">Profile</a>
+								<a class="dropdown-item" href="<?php echo base_url('Home/logout') ?>">Logout</a>
+							</div>
+						</li>
+					<?php else : ?>
+
+						<li class="nav-item"><a href="<?php echo base_url('Home/login') ?>" class="nav-link">Login</a></li>
+					<?php endif ?>
+					<li class="nav-item"><a href="<?php echo base_url('Dashboard') ?>" class="nav-link">[Admin]</a></li>
 					<li class="nav-item cta cta-colored"><a href="<?php echo base_url('Home/cart') ?>" class="nav-link"><span class="icon-shopping_cart"></span><span id="cart-count">[0]</span></a></li>
 
 				</ul>

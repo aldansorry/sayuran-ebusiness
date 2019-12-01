@@ -55,7 +55,8 @@ class Login extends CI_Controller
             }
             return true;
         }
-        return true;
+		$this->form_validation->set_message('authPassword', "");
+		return false;
     }
 
     public function logout()

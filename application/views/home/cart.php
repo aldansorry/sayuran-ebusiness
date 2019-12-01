@@ -74,23 +74,23 @@
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>$20.60</span>
+                        <span id="price-subtotal"></span>
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
-                        <span>$0.00</span>
+                        <span id="price-delivery"></span>
                     </p>
                     <p class="d-flex">
                         <span>Discount</span>
-                        <span>$3.00</span>
+                        <span id="price-discount"></span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>$17.60</span>
+                        <span id="price-total"></span>
                     </p>
                 </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p><a href="<?php echo base_url("Home/checkout") ?>" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
             </div>
         </div>
     </div>
@@ -99,6 +99,11 @@
 <?php $this->load->view('home/includes/footer') ?>
 
 <script>
+    var price_subtotal = 0;
+    var price_delivery = 0;
+    var price_discount = 0;
+    var price_total = 0;
+
     $(document).ready(function() {
 
         get_cart();
@@ -135,21 +140,32 @@
                 html += '</tr>';
                 $("#cart-container").append(html);
             });
+
+            price_subtotal = data.total;
+            checkout_data();
         });
+    }
+
+    var checkout_data = () => {
+        $('#price-subtotal').html(price_subtotal)
+        $('#price-delivery').html(price_delivery)
+        $('#price-discount').html(price_discount)
+        price_total = price_subtotal+price_delivery-price_discount;
+        $('#price-total').html(price_total)
     }
 
     var update_cart = (obj) => {
         let cartid = $(obj).data('cartid');
         let quantity = $(obj).val();
 
-        $(obj).attr('disabled',true);
+        $(obj).attr('disabled', true);
         $.ajax({
             url: "<?php echo base_url('Cart/update') ?>",
             type: "POST",
             data: {
                 cartid: cartid,
-                quantity : quantity
-             }
+                quantity: quantity
+            }
         }).done(function(data) {
             get_cart();
         });
