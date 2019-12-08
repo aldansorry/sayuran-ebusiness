@@ -88,17 +88,9 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="<?php echo base_url('Home') ?>" class="nav-link">Home</a></li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="<?php echo base_url('Home/shop') ?>">Shop</a>
-							<a class="dropdown-item" href="wishlist.html">Wishlist</a>
-							<a class="dropdown-item" href="product-single.html">Single Product</a>
-							<a class="dropdown-item" href="cart.html">Cart</a>
-							<a class="dropdown-item" href="checkout.html">Checkout</a>
-						</div>
-					</li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+					
+					<li class="nav-item active"><a href="<?php echo base_url('Home/shop') ?>" class="nav-link">Shop</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('Home/about') ?>" class="nav-link">About</a></li>
 					<?php if ($this->session->userdata('lg_status')) : ?>
 
 						<li class="nav-item dropdown">
@@ -113,7 +105,6 @@
 
 						<li class="nav-item"><a href="<?php echo base_url('Home/login') ?>" class="nav-link">Login</a></li>
 					<?php endif ?>
-					<li class="nav-item"><a href="<?php echo base_url('Dashboard') ?>" class="nav-link">[Admin]</a></li>
 					<li class="nav-item cta cta-colored"><a href="<?php echo base_url('Home/cart') ?>" class="nav-link"><span class="icon-shopping_cart"></span><span id="cart-count">[0]</span></a></li>
 
 				</ul>

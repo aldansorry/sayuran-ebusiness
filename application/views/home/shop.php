@@ -115,7 +115,7 @@
                 let html = "";
                 html += '<div class="col-md-6 col-lg-3 produk-data produk-page-' + page + '" style="display:none">';
                 html += '<div class="product">';
-                html += '<a href="<?php echo base_url('Home/produk/') ?>' + value.id + '" class="img-prod"><img class="img-fluid" src="<?php echo base_url('storage/produk/') ?>' + value.gambar + '" alt="Colorlib Template">';
+                html += '<a href="<?php echo base_url('Home/produk/') ?>' + value.id + '" class="img-prod"><img class="img-fluid" src="<?php echo base_url('storage/produk/') ?>' + value.gambar + '" alt="Colorlib Template" style="min-height:260px;max-height:260px;width:100%;">';
                 html += '<div class="overlay"></div>';
                 html += '</a>';
                 html += '<div class="text py-3 pb-4 px-3 text-center">';
@@ -124,19 +124,6 @@
                 html += '<div class="d-flex">';
                 html += '<div class="pricing">';
                 html += '<p class="price"><span>Rp. ' + value.harga + '</span></p>';
-                html += '</div>';
-                html += '</div>';
-                html += '<div class="bottom-area d-flex px-3">';
-                html += '<div class="m-auto d-flex">';
-                html += '<a href="<?php echo base_url('Home/produk/') ?>' + value.id + '" class="add-to-cart d-flex justify-content-center align-items-center text-center">';
-                html += '<span><i class="ion-ios-menu"></i></span>';
-                html += '</a>';
-                html += '<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">';
-                html += '<span><i class="ion-ios-cart"></i></span>';
-                html += '</a>';
-                html += '<a href="#" class="heart d-flex justify-content-center align-items-center ">';
-                html += '<span><i class="ion-ios-heart"></i></span>';
-                html += '</a>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';

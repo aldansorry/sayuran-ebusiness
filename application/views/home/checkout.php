@@ -103,7 +103,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="firstname">Password</label>
-                                    <input type="text" name="login[password]" class="form-control" style="color:black !important" placeholder="">
+                                    <input type="password" name="login[password]" class="form-control" style="color:black !important" placeholder="">
                                     <?php echo form_error('login[password]', '<p class="text-danger">', '</p>') ?>
                                 </div>
                             </div>
@@ -187,26 +187,18 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Password</label>
-                                    <input type="text" name="register[password]" class="form-control" style="color:black !important" placeholder="">
+                                    <input type="password" name="register[password]" class="form-control" style="color:black !important" placeholder="">
                                     <?php echo form_error('register[password]', '<p class="text-danger">', '</p>') ?>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="emailaddress">Reenter Password</label>
-                                    <input type="text" name="register[repassword]" class="form-control" style="color:black !important" placeholder="">
+                                    <input type="password" name="register[repassword]" class="form-control" style="color:black !important" placeholder="">
                                     <?php echo form_error('register[repassword]', '<p class="text-danger">', '</p>') ?>
                                 </div>
                             </div>
                             <div class="w-100"></div>
-                            <div class="col-md-12">
-                                <div class="form-group mt-4">
-                                    <div class="radio">
-                                        <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-                                        <label><input type="radio" name="optradio"> Ship to different address</label>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     <?php endif ?>
                 </div>
@@ -223,10 +215,6 @@
                                     <span>Delivery</span>
                                     <span><?php echo $delivery ?></span>
                                 </p>
-                                <p class="d-flex">
-                                    <span>Discount</span>
-                                    <span><?php echo $coupon ?></span>
-                                </p>
                                 <hr>
                                 <p class="d-flex total-price">
                                     <span>Total</span>
@@ -240,19 +228,19 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="emailaddress">Tanggal Kirim</label>
-                                        <input type="date" name="tanggal_kirim" class="form-control" style="color:black !important" placeholder="">
+                                        <input type="date" name="tanggal_kirim" class="form-control" style="color:black !important" placeholder="" min="<?php echo date("Y-m-d") ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="emailaddress">Waktu Kirim</label>
-                                        <input type="time" name="waktu_kirim" class="form-control" style="color:black !important" placeholder="">
+                                        <input type="time" name="waktu_kirim" class="form-control" style="color:black !important" placeholder="" min="<?php echo date('H:i') ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
+                                            <label><input type="checkbox" value="" class="mr-2" required> I have read and accept the terms and conditions</label>
                                         </div>
                                     </div>
                                 </div>

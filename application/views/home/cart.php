@@ -36,38 +36,12 @@
         </div>
         <div class="row justify-content-end">
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Coupon Code</h3>
-                    <p>Enter your coupon code if you have one</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Coupon code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
             </div>
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
-                    <h3>Estimate shipping and tax</h3>
-                    <p>Enter your destination to get a shipping estimate</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Country</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">State/Province</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Zip/Postal Code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
+                    <h3>Biaya Pengiriman</h3>
+                    <p>Rp 10000, gratis jika pembelian diatas 100000</p>
                 </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
             </div>
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
@@ -142,6 +116,9 @@
             });
 
             price_subtotal = data.total;
+            if(data.total < 100000){
+                price_delivery = 10000;
+            }
             checkout_data();
         });
     }

@@ -24,23 +24,23 @@
                             <div class="form-group">
                                 <label for="firstname">Email</label>
                                 <input type="text" name="email" class="form-control" style="color:black !important" placeholder="">
-                                    <?php echo form_error('email', '<p class="text-danger">', '</p>') ?>
+                                <?php echo form_error('email', '<p class="text-danger">', '</p>') ?>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="firstname">Password</label>
-                                <input type="text" name="password" class="form-control" style="color:black !important" placeholder="">
-                                    <?php echo form_error('password', '<p class="text-danger">', '</p>') ?>
+                                <input type="password" name="password" class="form-control" style="color:black !important" placeholder="">
+                                <?php echo form_error('password', '<p class="text-danger">', '</p>') ?>
                             </div>
                         </div>
 
                         <div class="w-100"></div>
                         <a href="#" class="btn btn-primary py-3 px-4" style="width:100% !important;" onclick="$('#form-login').submit()">Login</a>
 
-                        <div class="w-100">
-                            <div class="separator">OR Register</div>
-                        </div>
+                        <p class="text-center" style="text-align: center;width:100%;margin-top:20px;">
+                            <a href="<?php echo base_url('Home/register') ?>">Atau register untuk mendapatkan akun</a>
+                        </p>
                     </div>
                 </form><!-- END -->
             </div>

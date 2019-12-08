@@ -11,7 +11,12 @@ class Home extends CI_Controller
 
 	public function index()
 	{
-		$data['produk'] = $this->db->select('produk.*,min(produk_detail.harga) as harga')->join('produk_detail', 'produk.id=produk_detail.fk_produk')->get('produk')->result();
+		$data['produk'] = $this->db
+			->select('produk.*,min(produk_detail.harga) as harga')
+			->group_by('produk.id')
+			->join('produk_detail', 'produk.id=produk_detail.fk_produk')
+			->get('produk')
+			->result();
 		$this->load->view('home/home', $data);
 	}
 
@@ -38,15 +43,16 @@ class Home extends CI_Controller
 
 		$subtotal = $this->cart->total();
 		$delivery = 0;
-		$coupon = 0;
-		$total = $subtotal + $delivery - $coupon;
+		if ($subtotal < 100000) {
+			$delivery = 10000;
+		}
+		$total = $subtotal + $delivery;
 
 		if ($subtotal == 0) {
 			redirect('Home/cart');
 		}
 		$data['subtotal'] = $subtotal;
 		$data['delivery'] = $delivery;
-		$data['coupon'] = $coupon;
 		$data['total'] = $total;
 
 		$data['pengguna'] = null;
@@ -63,7 +69,15 @@ class Home extends CI_Controller
 				$this->form_validation->set_rules('login[password]', 'Password', 'callback_authPasswordCheckout');
 			} else {
 				#register
-				$this->form_validation->set_rules('register[nama]', 'Nama', "trim|required");
+				$this->form_validation->set_rules('register[nama]', 'nama', "trim|required");
+				$this->form_validation->set_rules('register[alamat]', 'alamat', "trim|required");
+				$this->form_validation->set_rules('register[alamatNote]', 'alamatNote', "trim");
+				$this->form_validation->set_rules('register[kecamatan]', 'kecamatan', "trim|required");
+				$this->form_validation->set_rules('register[kodepos]', 'kodepos', "trim|required");
+				$this->form_validation->set_rules('register[telepon]', 'telepon', "trim|required");
+				$this->form_validation->set_rules('register[email]', 'email', "trim|required|is_unique[pengguna.email]");
+				$this->form_validation->set_rules('register[password]', 'Password', "required|matches[register[repassword]]");
+				$this->form_validation->set_rules('register[repassword]', 'repassword', "required");
 			}
 		}
 
@@ -130,7 +144,7 @@ class Home extends CI_Controller
 
 			$set_penjualan = [
 				'kode' => $kode,
-				'tanggal_kirim' => $this->input->post('tanggal_kirim')." ".$this->input->post('waktu_kirim'),
+				'tanggal_kirim' => $this->input->post('tanggal_kirim') . " " . $this->input->post('waktu_kirim'),
 				'status' => '1',
 				'fk_pengguna' => $id_pengguna
 			];
@@ -255,7 +269,88 @@ class Home extends CI_Controller
 
 	public function register()
 	{
-		$this->load->view('home/register');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('register[nama]', 'nama', "trim|required");
+		$this->form_validation->set_rules('register[alamat]', 'alamat', "trim|required");
+		$this->form_validation->set_rules('register[alamatNote]', 'alamatNote', "trim");
+		$this->form_validation->set_rules('register[kecamatan]', 'kecamatan', "trim|required");
+		$this->form_validation->set_rules('register[kodepos]', 'kodepos', "trim|required");
+		$this->form_validation->set_rules('register[telepon]', 'telepon', "trim|required");
+		$this->form_validation->set_rules('register[email]', 'email', "trim|required|is_unique[pengguna.email]");
+		$this->form_validation->set_rules('register[password]', 'Password', "required|matches[register[repassword]]");
+		$this->form_validation->set_rules('register[repassword]', 'repassword', "required");
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('home/register');
+		} else {
+			$register = $this->input->post('register');
+			$set = [
+				'nama' => $register['nama'],
+				'alamat' => $register['alamat'],
+				'alamatNote' => $register['alamatNote'],
+				'kecamatan' => $register['kecamatan'],
+				'kodepos' => $register['kodepos'],
+				'telepon' => $register['telepon'],
+				'email' => $register['email'],
+				'password' => $register['password'],
+			];
+			$this->db->insert('pengguna', $set);
+			$id_pengguna = $this->db->insert_id();
+
+			$data_pengguna = $this->db->where('id', $id_pengguna)->get('pengguna')->row(0);
+			$this->session->set_userdata('lg_status', true);
+			$this->session->set_userdata('lg_nama', $data_pengguna->nama);
+			$this->session->set_userdata('lg_email', $data_pengguna->email);
+			$this->session->set_userdata('lg_id', $data_pengguna->id);
+			$this->session->set_userdata('lg_gambar', $data_pengguna->gambar);
+
+			$this->db->where('id', $data_pengguna->id)->update('pengguna', array('last_online' => date('Y-m-d H:i:s')));
+			redirect('Home');
+		}
+	}
+
+	public function profile()
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('register[nama]', 'nama', "trim|required");
+		$this->form_validation->set_rules('register[alamat]', 'alamat', "trim|required");
+		$this->form_validation->set_rules('register[alamatNote]', 'alamatNote', "trim");
+		$this->form_validation->set_rules('register[kecamatan]', 'kecamatan', "trim|required");
+		$this->form_validation->set_rules('register[kodepos]', 'kodepos', "trim|required");
+		$this->form_validation->set_rules('register[telepon]', 'telepon', "trim|required");
+		if ($this->input->post('register[password]') != "") {
+
+			$this->form_validation->set_rules('register[password]', 'Password', "required|matches[register[repassword]]");
+			$this->form_validation->set_rules('register[repassword]', 'repassword', "required");
+		}
+
+		if ($this->form_validation->run() == false) {
+			$data['pengguna'] = $this->db->where('id', $this->session->userdata('lg_id'))->get('pengguna')->row(0);
+			$this->load->view('home/profile', $data);
+		} else {
+			$register = $this->input->post('register');
+			$set = [
+				'nama' => $register['nama'],
+				'alamat' => $register['alamat'],
+				'alamatNote' => $register['alamatNote'],
+				'kecamatan' => $register['kecamatan'],
+				'kodepos' => $register['kodepos'],
+				'telepon' => $register['telepon'],
+			];
+			if ($this->input->post('register[password]') != "") {
+				$set['password'] = $register['password'];
+			}
+			$this->db->where('id', $this->session->userdata('lg_id'))->update('pengguna', $set);
+
+			redirect('Home/profile');
+		}
+	}
+
+	public function about()
+	{
+		$this->load->view('home/about');
 	}
 
 	public function pembelian()
@@ -272,7 +367,7 @@ class Home extends CI_Controller
 			$config['upload_path']          = './storage/buktipembayaran/';
 			$config['allowed_types']        = 'gif|jpg|png';
 			$config['max_size']             = 2000;
-			$config['file_name'] 		= $kode.".jpg";
+			$config['file_name'] 		= $kode . ".jpg";
 
 			$this->load->library('upload', $config);
 
@@ -284,7 +379,7 @@ class Home extends CI_Controller
 				$upload_data = $this->upload->data();
 				$set['status'] = 2;
 				$set['bukti_pembayaran'] = $upload_data['file_name'];
-				$this->db->where('kode',$kode)->update('penjualan', $set);
+				$this->db->where('kode', $kode)->update('penjualan', $set);
 				redirect('Home/pembelian');
 			}
 		}

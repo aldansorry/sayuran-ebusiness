@@ -175,27 +175,14 @@
 				<?php foreach ($produk as $key => $value) : ?>
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="product">
-							<a href="<?php echo base_url('Home/produk/'.$value->id) ?>" class="img-prod"><img class="img-fluid" src="<?php echo base_url('storage/produk/'.$value->gambar) ?>" alt="Colorlib Template">
+							<a href="<?php echo base_url('Home/produk/'.$value->id) ?>" class="img-prod"><img class="img-fluid" src="<?php echo base_url('storage/produk/'.$value->gambar) ?>" alt="Colorlib Template" style="min-height:260px;max-height:260px;width:100%;">
 								<div class="overlay"></div>
 							</a>
 							<div class="text py-3 pb-4 px-3 text-center">
 								<h3><a href="#"><?php echo $value->nama ?></a></h3>
 								<div class="d-flex">
-									<div class="pricing">
+									<div class="pricing" style="text-align:center;">
 										<p class="price"><span>Rp. <?php echo number_format($value->harga,0,',','.') ?></span></p>
-									</div>
-								</div>
-								<div class="bottom-area d-flex px-3">
-									<div class="m-auto d-flex">
-										<a href="<?php echo base_url('Home/produk/'.$value->id) ?>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-											<span><i class="ion-ios-menu"></i></span>
-										</a>
-										<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-											<span><i class="ion-ios-cart"></i></span>
-										</a>
-										<a href="#" class="heart d-flex justify-content-center align-items-center ">
-											<span><i class="ion-ios-heart"></i></span>
-										</a>
 									</div>
 								</div>
 							</div>
