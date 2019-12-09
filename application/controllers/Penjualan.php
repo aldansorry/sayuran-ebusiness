@@ -32,6 +32,19 @@ class Penjualan extends CI_Controller {
 
 	public function set_konfirmasi($id)
 	{
+		$data_penjualan =  $this->db
+		->select('penjualan.*,(select sum(jumlah*harga_sekarang) from penjualan_detail where fk_penjualan=penjualan.id) total')
+		
+		->where('id',$id)
+		->get('penjualan')
+		->row(0);
+		
+		##tambah point
+		if($data_penjualan->payment_method == 1){
+			$data_pengguna = $this->db->where('id',$data_penjualan->fk_pengguna)->get('pengguna')->row(0);
+			$set_point['point'] = $data_pengguna->point+($data_penjualan->total*0.1);
+			$this->db->where('id',$data_pengguna->id)->update('pengguna',$set_point);
+		}
 		$set['status'] = 3;
 		$this->db->where('id',$id)->update('penjualan',$set);
 		redirect('Penjualan/konfirmasipembeyaran');

@@ -46,9 +46,9 @@
                                 <th>Kode</th>
                                 <th>Tanggal</th>
                                 <th>Tanggal Kirim</th>
+                                <th>Methode Pembayaran</th>
                                 <th>Total</th>
                                 <th>Gambar</th>
-                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -59,13 +59,19 @@
                                     <td><?php echo $value->kode ?></td>
                                     <td><?php echo $value->tanggal ?></td>
                                     <td><?php echo $value->tanggal_kirim ?></td>
-                                    <td><?php echo $value->total ?></td>
+                                    <td>
+                                        <?php if($value->payment_method == 1): ?>
+                                            <span class="badge badge-warning">Transfer</span>
+                                        <?php else: ?>
+                                            <span class="badge badge-primary">Sok Point <?php echo $this->db->select('point')->where('id', $value->fk_pengguna)->get('pengguna')->row(0)->point ?></span>
+                                        <?php endif ?>
+                                    </td>
+                                    <td><?php echo $value->total+($value->total  < 100000 ? 10000 : 0) ?></td>
                                     <td>
                                         <a href="<?php echo base_url('storage/buktipembayaran/' . $value->bukti_pembayaran) ?>">
                                             <img src="<?php echo base_url('storage/buktipembayaran/' . $value->bukti_pembayaran) ?>" alt="" style="width:100px">
                                         </a>
                                     </td>
-                                    <td><?php echo $value->status ?></td>
                                     <td>
                                         <a href="<?php echo base_url('Penjualan/set_konfirmasi/'.$value->id) ?>" class="btn btn-sm btn-success">Konfirmasi</a>
                                     </td>

@@ -45,7 +45,7 @@
                                     </td>
 
 
-                                    <td class="total"><?php echo $total ?></td>
+                                    <td class="total"><?php echo $total+($total  < 100000 ? 10000 : 0) ?></td>
                                     <td>
                                     <?php 
                                         switch($value->status){

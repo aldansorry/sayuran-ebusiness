@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2019 at 10:50 AM
+-- Generation Time: Dec 09, 2019 at 08:59 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -38,6 +38,7 @@ CREATE TABLE `pengguna` (
   `telepon` varchar(16) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(32) NOT NULL,
+  `point` double NOT NULL DEFAULT '0',
   `gambar` varchar(128) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_online` datetime DEFAULT NULL
@@ -47,9 +48,11 @@ CREATE TABLE `pengguna` (
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`id`, `nama`, `alamat`, `alamatNote`, `kecamatan`, `kodepos`, `telepon`, `email`, `password`, `gambar`, `created_date`, `last_online`) VALUES
-(2, '3', '3', '3', '3', '3', '3', '3', '3', '', '2019-12-01 12:55:00', '2019-12-01 10:46:06'),
-(5, '4', '4', '4', '4', '4', '4', '4', '4', '', '2019-12-01 13:44:59', '2019-12-01 07:45:18');
+INSERT INTO `pengguna` (`id`, `nama`, `alamat`, `alamatNote`, `kecamatan`, `kodepos`, `telepon`, `email`, `password`, `point`, `gambar`, `created_date`, `last_online`) VALUES
+(2, '3', '3', '3', '3', '3', '3', '3', '3', 0, '', '2019-12-01 12:55:00', '2019-12-08 07:40:05'),
+(5, '4', '4', '4', '4', '4', '4', '4', '4', 0, '', '2019-12-01 13:44:59', '2019-12-01 07:45:18'),
+(6, 'a', 'a', 'a', 'a222', 'a', 'a', 'a', '2', 100000, '', '2019-12-08 13:51:15', '2019-12-08 08:29:29'),
+(7, 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 9000, '', '2019-12-08 13:52:20', '2019-12-09 08:56:20');
 
 -- --------------------------------------------------------
 
@@ -114,7 +117,10 @@ INSERT INTO `penjualan` (`id`, `kode`, `tanggal`, `tanggal_kirim`, `payment_meth
 (41, '0D98A2B7818BC0BB', '2019-12-01 14:25:02', '0000-00-00 00:00:00', 0, 1, '', 5),
 (42, '809B58C07CA1D945', '2019-12-01 14:25:02', '0000-00-00 00:00:00', 0, 1, '', 5),
 (43, '03602DC71839BB63', '2019-12-01 14:25:02', '0000-00-00 00:00:00', 0, 1, '', 5),
-(44, 'C405616AB8903D39', '2019-12-01 15:30:35', '2019-12-01 02:02:00', 0, 5, 'C405616AB8903D39.jpg', 2);
+(44, 'C405616AB8903D39', '2019-12-01 15:30:35', '2019-12-01 02:02:00', 0, 5, 'C405616AB8903D39.jpg', 2),
+(45, 'B14106A8DC303A78', '2019-12-09 14:39:40', '2019-12-10 02:22:00', 2, 2, '', 7),
+(46, '8BC79A90767169C6', '2019-12-09 14:55:01', '2019-12-19 23:11:00', 2, 2, '', 7),
+(47, 'B271A6C9A3A38506', '2019-12-09 14:55:46', '2019-12-10 02:02:00', 1, 3, 'B271A6C9A3A38506.jpg', 7);
 
 -- --------------------------------------------------------
 
@@ -141,7 +147,10 @@ INSERT INTO `penjualan_detail` (`id`, `fk_penjualan`, `fk_produk_detail`, `jumla
 (6, 7, 8, 1, 10000),
 (7, 8, 8, 1, 10000),
 (8, 9, 8, 1, 10000),
-(9, 44, 8, 1, 10000);
+(9, 44, 8, 1, 10000),
+(10, 45, 11, 1, 9000),
+(11, 46, 11, 1, 9000),
+(12, 47, 11, 10, 9000);
 
 -- --------------------------------------------------------
 
@@ -233,7 +242,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `role`, `gambar`, `fk_supplier`, `last_online`) VALUES
-(1, '1', '1', '1', 1, 'a4a769fecc9a16bddb3d5a0fe40fa913.jpg', NULL, '2019-12-01 10:48:15'),
+(1, '1', '1', '1', 1, 'a4a769fecc9a16bddb3d5a0fe40fa913.jpg', NULL, '2019-12-09 08:56:04'),
 (2, '2', '2', '2', 2, 'e19a393cf6b1b521078d95bb31d0b675.jpg', 2, '2019-11-30 14:29:18');
 
 --
@@ -295,19 +304,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `produk`
