@@ -41,7 +41,7 @@
                 </p>
                 <div class="row mt-4">
                     <div class="col-md-6">
-                        <img src="<?php echo base_url('storage/produk/' . $produk->gambar) ?>" class="img-fluid mb-3" id="produk-detail-img" alt="Colorlib Template" style="width:150px;">
+                        <img src="<?php echo base_url('storage/produk/' . $this->db->where('fk_produk', $produk->id)->get('produk_detail')->row(0)->gambar) ?>" class="img-fluid mb-3" id="produk-detail-img" alt="Colorlib Template" style="width:200px;">
                         <div class="form-group d-flex">
                             <div class="select-wrap">
                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -68,9 +68,7 @@
                         </span>
                     </div>
                     <div class="w-100"></div>
-                    <div class="col-md-12">
-                        <p style="color: #000;">600 kg available</p>
-                    </div>
+                    
                 </div>
                 <p><a href="#" class="btn btn-black py-3 px-5" id="btn-add-to-cart">Add to Cart</a></p>
             </div>

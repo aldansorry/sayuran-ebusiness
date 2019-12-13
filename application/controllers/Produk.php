@@ -49,7 +49,7 @@ class Produk extends CI_Controller
 		} else {
 			$set = $this->input->post();
 			$config['upload_path']          = './storage/produk/';
-			$config['allowed_types']        = 'gif|jpg|png';
+			$config['allowed_types']        = 'gif|jpg|png|jpeg';
 			$config['max_size']             = 2000;
 			$config['encrypt_name'] 		= true;
 
